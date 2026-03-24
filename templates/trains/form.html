@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}{{ action }} Train{% endblock %}
+{% block page_title %}{{ action }} Train{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>{{ action }} <span>Train</span></h1>
+  <a href="{{ url_for('trains.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div class="card" style="max-width:860px;">
+  <form method="POST">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>State / Union Territory</label>
+        <input type="text" name="state_ut" value="{{ train.state_ut if train else '' }}" placeholder="e.g. Maharashtra" required/>
+      </div>
+      <div class="form-group">
+        <label>Train Number</label>
+        <input type="number" name="train_number" value="{{ train.train_number if train else '' }}"
+               placeholder="e.g. 12301" required {% if train %}readonly{% endif %}/>
+      </div>
+      <div class="form-group" style="grid-column:span 2;">
+        <label>Train Name</label>
+        <input type="text" name="train_name" value="{{ train.train_name if train else '' }}" placeholder="e.g. Mumbai Rajdhani Express" required/>
+      </div>
+      <div class="form-group" style="grid-column:span 2;">
+        <label>Route (Source to Destination)</label>
+        <input type="text" name="route" value="{{ train.route if train else '' }}" placeholder="e.g. Mumbai to New Delhi" required/>
+      </div>
+      <div class="form-group">
+        <label>Departure Time (HH:MM)</label>
+        <input type="text" name="departure_time" value="{{ train.departure_time if train else '' }}" placeholder="16:30" required/>
+      </div>
+      <div class="form-group">
+        <label>Arrival Time (HH:MM)</label>
+        <input type="text" name="arrival_time" value="{{ train.arrival_time if train else '' }}" placeholder="10:15" required/>
+      </div>
+      <div class="form-group">
+        <label>Train Type</label>
+        <select name="train_type" required>
+          {% for t in ['Passenger','Mail','Express','Superfast','Rajdhani','Shatabdi'] %}
+          <option value="{{ t }}" {% if train and train.train_type == t %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select name="status">
+          {% for s in ['Active','Delayed','Cancelled'] %}
+          <option value="{{ s }}" {% if train and train.status == s %}selected{% endif %}>{{ s }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Capacity (Seats)</label>
+        <input type="number" name="capacity" value="{{ train.capacity if train else '' }}" placeholder="1000" required/>
+      </div>
+      <div class="form-group">
+        <label>Platform Number</label>
+        <input type="number" name="platform_number" value="{{ train.platform_number if train else '' }}" placeholder="3" required/>
+      </div>
+      <div class="form-group">
+        <label>Distance (km)</label>
+        <input type="number" step="0.1" name="distance_km" value="{{ train.distance_km if train else '' }}" placeholder="895" required/>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> {{ action }} Train</button>
+      <a href="{{ url_for('trains.index') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

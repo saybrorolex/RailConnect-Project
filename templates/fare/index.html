@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Fare Calculator{% endblock %}
+{% block page_title %}Fare Calculator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Fare <span>Calculator</span></h1>
+</div>
+
+<div style="display:grid;grid-template-columns:480px 1fr;gap:28px;align-items:start;max-width:900px;">
+  <div class="card">
+    <div class="card-title"><i class="fas fa-calculator"></i> Calculate Fare</div>
+    <form method="POST">
+      <div class="form-group" style="margin-bottom:18px;">
+        <label>Train Class</label>
+        <select name="train_class" required>
+          <option value="">— Select class —</option>
+          {% for c in classes %}
+          <option value="{{ c }}" {% if result and result.class == c %}selected{% endif %}>{{ c }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:18px;">
+        <label>Train Type</label>
+        <select name="train_type" required>
+          <option value="">— Select type —</option>
+          {% for t in types %}
+          <option value="{{ t }}" {% if result and result.type == t %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:24px;">
+        <label>Distance (km)</label>
+        <input type="number" name="distance" step="0.1" min="1"
+               value="{{ result.distance if result else '' }}" placeholder="e.g. 1200" required/>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-indian-rupee-sign"></i> Calculate Fare
+      </button>
+    </form>
+  </div>
+
+  <div>
+    {% if result %}
+    <div class="fare-result">
+      <div style="font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--white-dim);margin-bottom:12px;">
+        Estimated Fare
+      </div>
+      <div class="fare-amount">
+        <span>₹</span>{{ "{:,.2f}".format(result.fare) }}
+      </div>
+      <div class="fare-meta" style="margin-top:14px;">
+        <span style="background:var(--navy-3);padding:4px 12px;border-radius:20px;margin:0 4px;">{{ result.class }}</span>
+        <span style="background:var(--navy-3);padding:4px 12px;border-radius:20px;margin:0 4px;">{{ result.type }}</span>
+        <span style="background:var(--navy-3);padding:4px 12px;border-radius:20px;margin:0 4px;">{{ result.distance }} km</span>
+      </div>
+    </div>
+    {% else %}
+    <div class="card" style="text-align:center;padding:60px 24px;border-style:dashed;">
+      <i class="fas fa-calculator" style="font-size:48px;color:var(--navy-4);margin-bottom:16px;display:block;"></i>
+      <p style="color:var(--white-dim);">Fill in the form to calculate the estimated fare</p>
+    </div>
+    {% endif %}
+
+    <!-- Fare Table Reference -->
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title" style="font-size:16px;"><i class="fas fa-table"></i> Fare Rate Reference</div>
+      <table>
+        <thead><tr><th>Class</th><th>Base Rate/km</th></tr></thead>
+        <tbody>
+          <tr><td>General</td><td class="mono" style="color:var(--gold);">₹0.80</td></tr>
+          <tr><td>Sleeper</td><td class="mono" style="color:var(--gold);">₹1.00</td></tr>
+          <tr><td>AC 3-Tier</td><td class="mono" style="color:var(--gold);">₹2.00</td></tr>
+          <tr><td>AC 2-Tier</td><td class="mono" style="color:var(--gold);">₹3.00</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:14px;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:8px;">Type Surcharge</div>
+        <table>
+          <thead><tr><th>Train Type</th><th>Surcharge</th></tr></thead>
+          <tbody>
+            <tr><td>Passenger</td><td class="mono">0%</td></tr>
+            <tr><td>Mail</td><td class="mono">5%</td></tr>
+            <tr><td>Express</td><td class="mono">10%</td></tr>
+            <tr><td>Superfast</td><td class="mono">20%</td></tr>
+            <tr><td>Rajdhani</td><td class="mono">30%</td></tr>
+            <tr><td>Shatabdi</td><td class="mono">35%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

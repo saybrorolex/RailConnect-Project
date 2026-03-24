@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Search Trains{% endblock %}
+{% block page_title %}Search Trains{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Search <span>Trains</span></h1>
+  <a href="{{ url_for('search.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<form method="GET" class="search-bar" style="margin-bottom:24px;">
+  <input type="text" name="q" value="{{ q }}" placeholder="Enter search term…" autofocus/>
+  <select name="by">
+    <option value="name"     {% if by=='name'     %}selected{% endif %}>By Name</option>
+    <option value="type"     {% if by=='type'     %}selected{% endif %}>By Train Type</option>
+    <option value="station"  {% if by=='station'  %}selected{% endif %}>By Station</option>
+    <option value="platform" {% if by=='platform' %}selected{% endif %}>By Platform No.</option>
+  </select>
+  <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+  <a href="{{ url_for('search.search_trains') }}" class="btn btn-secondary">Reset</a>
+</form>
+
+{% if q %}
+<div class="card" style="padding:0;">
+  <div style="padding:16px 20px;border-bottom:1px solid var(--navy-4);color:var(--white-dim);font-size:13px;">
+    {{ results|length }} result(s) for "<strong style="color:var(--white);">{{ q }}</strong>"
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr>
+        <th>Train No.</th><th>Name</th><th>Route</th><th>Depart</th>
+        <th>Arrive</th><th>Type</th><th>Platform</th><th>Distance</th><th>Status</th>
+      </tr></thead>
+      <tbody>
+        {% for t in results %}
+        <tr>
+          <td class="mono">{{ t.train_number }}</td>
+          <td style="font-weight:600;">{{ t.train_name }}</td>
+          <td style="color:var(--white-dim);font-size:12px;">{{ t.route }}</td>
+          <td class="mono" style="color:var(--gold);">{{ t.departure_time }}</td>
+          <td class="mono" style="color:var(--gold);">{{ t.arrival_time }}</td>
+          <td><span class="badge badge-active">{{ t.train_type }}</span></td>
+          <td>{{ t.platform_number }}</td>
+          <td style="color:var(--white-dim);">{{ t.distance_km }} km</td>
+          <td><span class="badge badge-{{ t.status.lower() }}">{{ t.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9">
+          <div class="empty-state">
+            <i class="fas fa-train"></i>
+            <p>No trains found for "{{ q }}"</p>
+          </div>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="empty-state">
+  <i class="fas fa-magnifying-glass"></i>
+  <p>Enter a search term above to find trains</p>
+</div>
+{% endif %}
+{% endblock %}

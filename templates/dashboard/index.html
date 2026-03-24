@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- ── KPI STATS ─────────────────────────────── -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-train"></i></div>
+    <div class="stat-value">{{ total_trains }}</div>
+    <div class="stat-label">Total Trains</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-ticket"></i></div>
+    <div class="stat-value">{{ total_bookings }}</div>
+    <div class="stat-label">Total Bookings</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-users"></i></div>
+    <div class="stat-value">{{ total_passengers }}</div>
+    <div class="stat-label">Passengers</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-indian-rupee-sign"></i></div>
+    <div class="stat-value">₹{{ "{:,.0f}".format(total_revenue) }}</div>
+    <div class="stat-label">Total Revenue</div>
+  </div>
+</div>
+
+<!-- ── CHARTS ────────────────────────────────── -->
+<div class="charts-grid">
+  <div class="chart-card">
+    <div class="card-title"><i class="fas fa-circle-dot"></i> Booking Status</div>
+    <canvas id="statusChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <div class="card-title"><i class="fas fa-chart-bar"></i> Revenue by Class</div>
+    <canvas id="classChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <div class="card-title"><i class="fas fa-chart-line"></i> Trains by Type</div>
+    <canvas id="typeChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <div class="card-title"><i class="fas fa-train"></i> Active Trains</div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr>
+          <th>Number</th><th>Name</th><th>Type</th><th>Platform</th><th>Seats Left</th>
+        </tr></thead>
+        <tbody>
+          {% for t in active_trains %}
+          <tr>
+            <td class="mono">{{ t.train_number }}</td>
+            <td>{{ t.train_name }}</td>
+            <td><span class="badge badge-active">{{ t.train_type }}</span></td>
+            <td>{{ t.platform_number }}</td>
+            <td>{{ t.available_seats }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5" style="text-align:center;color:var(--white-dim)">No trains found</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ── RECENT BOOKINGS ───────────────────────── -->
+<div class="card">
+  <div class="card-title"><i class="fas fa-clock-rotate-left"></i> Recent Bookings</div>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr>
+        <th>Booking ID</th><th>Passenger</th><th>Train</th>
+        <th>Class</th><th>Fare</th><th>Status</th><th>Date</th>
+      </tr></thead>
+      <tbody>
+        {% for b in recent_bookings %}
+        <tr>
+          <td><a href="{{ url_for('bookings.detail', booking_id=b.booking_id) }}" class="mono">{{ b.booking_id }}</a></td>
+          <td>{{ b.passenger_name }}</td>
+          <td class="mono">{{ b.train_number_fk }}</td>
+          <td>{{ b.travel_class }}</td>
+          <td>₹{{ b.fare_amount }}</td>
+          <td><span class="badge badge-{{ b.booking_status.lower() }}">{{ b.booking_status }}</span></td>
+          <td style="color:var(--white-dim);font-size:12px;">{{ b.booking_date.strftime('%d %b %Y') }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" style="text-align:center;color:var(--white-dim);padding:40px;">No bookings yet</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const C = { red:'#c0392b', redBright:'#e74c3c', gold:'#f0a500', navy3:'#1a2540', navy4:'#243050', white:'#f0f4ff', dim:'#8899bb', green:'#27ae60', amber:'#e67e22' };
+Chart.defaults.color = C.dim;
+Chart.defaults.borderColor = C.navy4;
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+new Chart(document.getElementById('statusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: {{ status_labels | tojson }},
+    datasets: [{ data: {{ status_counts | tojson }}, backgroundColor: [C.green, C.amber, C.red], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { position:'bottom' } }, cutout: '65%' }
+});
+
+new Chart(document.getElementById('classChart'), {
+  type: 'bar',
+  data: {
+    labels: {{ class_labels | tojson }},
+    datasets: [{ label:'Revenue (₹)', data: {{ class_amounts | tojson }}, backgroundColor: C.red, borderRadius: 6 }]
+  },
+  options: { plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true } } }
+});
+
+new Chart(document.getElementById('typeChart'), {
+  type: 'line',
+  data: {
+    labels: {{ type_labels | tojson }},
+    datasets: [{ label:'Trains', data: {{ type_counts | tojson }}, borderColor: C.gold, backgroundColor:'rgba(240,165,0,0.1)', tension:0.4, fill:true, pointBackgroundColor:C.gold }]
+  },
+  options: { plugins:{ legend:{display:false} }, scales:{ y:{ beginAtZero:true } } }
+});
+</script>
+{% endblock %}

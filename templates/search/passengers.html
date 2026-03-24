@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Search Passengers{% endblock %}
+{% block page_title %}Search Passengers{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Search <span>Passengers</span></h1>
+  <a href="{{ url_for('search.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<form method="GET" class="search-bar" style="margin-bottom:24px;">
+  <input type="text" name="q" value="{{ q }}" placeholder="Enter search term…" autofocus/>
+  <select name="by">
+    <option value="name"        {% if by=='name'        %}selected{% endif %}>By Passenger Name</option>
+    <option value="booking_id"  {% if by=='booking_id'  %}selected{% endif %}>By Booking ID</option>
+    <option value="passenger_id"{% if by=='passenger_id'%}selected{% endif %}>By Passenger ID</option>
+    <option value="status"      {% if by=='status'      %}selected{% endif %}>By Status</option>
+    <option value="source"      {% if by=='source'      %}selected{% endif %}>By Source Station</option>
+    <option value="destination" {% if by=='destination' %}selected{% endif %}>By Destination</option>
+  </select>
+  <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+  <a href="{{ url_for('search.search_passengers') }}" class="btn btn-secondary">Reset</a>
+</form>
+
+{% if q %}
+<div class="card" style="padding:0;">
+  <div style="padding:16px 20px;border-bottom:1px solid var(--navy-4);color:var(--white-dim);font-size:13px;">
+    {{ results|length }} result(s) for "<strong style="color:var(--white);">{{ q }}</strong>"
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr>
+        <th>Booking ID</th><th>Passenger</th><th>Passenger ID</th>
+        <th>Train</th><th>Route</th><th>Journey Date</th>
+        <th>Class</th><th>Fare</th><th>Status</th><th></th>
+      </tr></thead>
+      <tbody>
+        {% for b in results %}
+        <tr>
+          <td class="mono" style="color:var(--gold);">{{ b.booking_id }}</td>
+          <td style="font-weight:600;">{{ b.passenger_name }}</td>
+          <td class="mono" style="color:var(--white-dim);">{{ b.passenger_id }}</td>
+          <td class="mono">{{ b.train_number_fk }}</td>
+          <td style="font-size:12px;color:var(--white-dim);">{{ b.source_station }} → {{ b.destination_station }}</td>
+          <td style="font-size:12px;">{{ b.journey_date.strftime('%d %b %Y') }}</td>
+          <td>{{ b.travel_class }}</td>
+          <td style="color:var(--gold);">₹{{ b.fare_amount }}</td>
+          <td><span class="badge badge-{{ b.booking_status.lower() }}">{{ b.booking_status }}</span></td>
+          <td>
+            <a href="{{ url_for('bookings.detail', booking_id=b.booking_id) }}" class="btn btn-secondary btn-sm btn-icon">
+              <i class="fas fa-eye"></i>
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="10">
+          <div class="empty-state">
+            <i class="fas fa-users"></i>
+            <p>No passengers found for "{{ q }}"</p>
+          </div>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="empty-state">
+  <i class="fas fa-magnifying-glass"></i>
+  <p>Enter a search term above to find passengers or bookings</p>
+</div>
+{% endif %}
+{% endblock %}

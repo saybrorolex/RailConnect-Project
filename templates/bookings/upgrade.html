@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Upgrade Ticket{% endblock %}
+{% block page_title %}Upgrade Ticket{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Upgrade <span>{{ booking.booking_id }}</span></h1>
+  <a href="{{ url_for('bookings.detail', booking_id=booking.booking_id) }}" class="btn btn-secondary">
+    <i class="fas fa-arrow-left"></i> Back
+  </a>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+
+  <!-- CURRENT TICKET INFO -->
+  <div class="card">
+    <div class="card-title"><i class="fas fa-ticket"></i> Current Booking</div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Passenger</div>
+        <div style="font-weight:600;">{{ booking.passenger_name }}</div>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Train</div>
+        <div>{{ train.train_name }} <span class="mono" style="color:var(--gold);">#{{ train.train_number }}</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Route</div>
+        <div>{{ booking.source_station }} → {{ booking.destination_station }}</div>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Current Class</div>
+        <div style="font-size:20px;font-weight:700;color:var(--white);">{{ booking.travel_class }}</div>
+      </div>
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Current Fare</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--white-dim);">₹{{ booking.fare_amount }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPGRADE FORM -->
+  <div class="card" style="border-color:var(--red);box-shadow:0 0 20px var(--red-glow);">
+    <div class="card-title"><i class="fas fa-arrow-up"></i> Select New Class</div>
+
+    <form method="POST">
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+        {% for cls in classes %}
+        <label style="cursor:pointer;">
+          <div style="display:flex;align-items:center;justify-content:space-between;
+                      background:var(--navy-3);border:2px solid {% if cls == booking.travel_class %}var(--white-mute){% else %}var(--navy-4){% endif %};
+                      border-radius:10px;padding:14px 18px;transition:all .2s;
+                      {% if cls == booking.travel_class %}opacity:.5;{% endif %}"
+               class="class-option">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <input type="radio" name="travel_class" value="{{ cls }}"
+                     {% if cls == booking.travel_class %}disabled{% endif %}
+                     style="accent-color:var(--red);width:16px;height:16px;">
+              <span style="font-weight:600;font-size:15px;">{{ cls }}</span>
+              {% if cls == booking.travel_class %}
+              <span style="font-size:11px;color:var(--white-mute);font-style:italic;">current</span>
+              {% endif %}
+            </div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;
+                        color:{% if fare_preview[cls] > booking.fare_amount %}var(--red-bright){% elif fare_preview[cls] < booking.fare_amount %}var(--green){% else %}var(--white-dim){% endif %};">
+              ₹{{ fare_preview[cls] }}
+            </div>
+          </div>
+        </label>
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+        <i class="fas fa-arrow-up"></i> Confirm Upgrade
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('input[name="travel_class"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    document.querySelectorAll('.class-option').forEach(el => {
+      el.style.borderColor = 'var(--navy-4)';
+    });
+    if (this.checked) {
+      this.closest('.class-option').style.borderColor = 'var(--red)';
+      this.closest('.class-option').style.boxShadow = '0 0 12px var(--red-glow)';
+    }
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block page_title %}Search{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Search <span>System</span></h1>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+  <a href="{{ url_for('search.search_trains') }}" style="text-decoration:none;">
+    <div class="card" style="cursor:pointer;transition:all .2s;text-align:center;padding:40px 24px;"
+         onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--navy-4)'">
+      <i class="fas fa-train" style="font-size:48px;color:var(--red-bright);margin-bottom:16px;display:block;"></i>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;">Search Trains</div>
+      <p style="color:var(--white-dim);font-size:13px;margin-top:8px;">
+        Filter by name, type, station, departure time, or platform
+      </p>
+    </div>
+  </a>
+  <a href="{{ url_for('search.search_passengers') }}" style="text-decoration:none;">
+    <div class="card" style="cursor:pointer;transition:all .2s;text-align:center;padding:40px 24px;"
+         onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='var(--navy-4)'">
+      <i class="fas fa-users" style="font-size:48px;color:var(--gold);margin-bottom:16px;display:block;"></i>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;">Search Passengers</div>
+      <p style="color:var(--white-dim);font-size:13px;margin-top:8px;">
+        Look up bookings by name, booking ID, passenger ID, status, or station
+      </p>
+    </div>
+  </a>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Trains{% endblock %}
+{% block page_title %}Train Management{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Train <span>Schedule</span></h1>
+  {% if current_user.role == 'admin' %}
+  <a href="{{ url_for('trains.add') }}" class="btn btn-primary">
+    <i class="fas fa-plus"></i> Add Train
+  </a>
+  {% endif %}
+</div>
+
+<!-- Search/Filter Bar -->
+<form method="GET" class="search-bar">
+  <input type="text" name="search" placeholder="Search by name or number…" value="{{ search }}"/>
+  <select name="type">
+    <option value="">All Types</option>
+    {% for t in train_types %}
+    <option value="{{ t }}" {% if selected_type == t %}selected{% endif %}>{{ t }}</option>
+    {% endfor %}
+  </select>
+  <select name="status">
+    <option value="">All Status</option>
+    <option value="Active"    {% if selected_status=='Active'    %}selected{% endif %}>Active</option>
+    <option value="Delayed"   {% if selected_status=='Delayed'   %}selected{% endif %}>Delayed</option>
+    <option value="Cancelled" {% if selected_status=='Cancelled' %}selected{% endif %}>Cancelled</option>
+  </select>
+  <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Filter</button>
+  <a href="{{ url_for('trains.index') }}" class="btn btn-secondary">Reset</a>
+</form>
+
+<div class="card" style="padding:0;">
+  <div class="table-wrapper">
+    <table>
+      <thead><tr>
+        <th>Train No.</th><th>Name</th><th>Route</th>
+        <th>Depart</th><th>Arrive</th><th>Type</th>
+        <th>Platform</th><th>Distance</th><th>Seats Left</th>
+        <th>Status</th>
+        {% if current_user.role == 'admin' %}<th>Actions</th>{% endif %}
+      </tr></thead>
+      <tbody>
+        {% for t in trains %}
+        <tr>
+          <td class="mono">{{ t.train_number }}</td>
+          <td style="font-weight:600;">{{ t.train_name }}</td>
+          <td style="color:var(--white-dim);font-size:12px;">{{ t.route }}</td>
+          <td class="mono" style="color:var(--gold);">{{ t.departure_time }}</td>
+          <td class="mono" style="color:var(--gold);">{{ t.arrival_time }}</td>
+          <td><span class="badge badge-active">{{ t.train_type }}</span></td>
+          <td>{{ t.platform_number }}</td>
+          <td style="color:var(--white-dim);">{{ t.distance_km }} km</td>
+          <td>
+            <span style="color:{% if t.available_seats > 50 %}var(--green){% elif t.available_seats > 0 %}var(--amber){% else %}var(--red-bright){% endif %}">
+              {{ t.available_seats }}
+            </span>
+          </td>
+          <td><span class="badge badge-{{ t.status.lower() }}">{{ t.status }}</span></td>
+          {% if current_user.role == 'admin' %}
+          <td>
+            <div style="display:flex;gap:6px;">
+              <a href="{{ url_for('trains.edit', train_number=t.train_number) }}" class="btn btn-secondary btn-sm btn-icon" title="Edit"><i class="fas fa-pen"></i></a>
+              <form method="POST" action="{{ url_for('trains.delete', train_number=t.train_number) }}" onsubmit="return confirm('Delete {{ t.train_name }}?')">
+                <button type="submit" class="btn btn-danger btn-sm btn-icon" title="Delete"><i class="fas fa-trash"></i></button>
+              </form>
+            </div>
+          </td>
+          {% endif %}
+        </tr>
+        {% else %}
+        <tr><td colspan="11">
+          <div class="empty-state">
+            <i class="fas fa-train"></i>
+            <p>No trains found</p>
+            {% if current_user.role == 'admin' %}
+            <a href="{{ url_for('trains.add') }}" class="btn btn-primary">Add First Train</a>
+            {% endif %}
+          </div>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

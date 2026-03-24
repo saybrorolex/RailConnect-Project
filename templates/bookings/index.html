@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Bookings{% endblock %}
+{% block page_title %}Bookings{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>{% if current_user.role == 'admin' %}All <span>Bookings</span>{% else %}My <span>Bookings</span>{% endif %}</h1>
+  <a href="{{ url_for('bookings.book') }}" class="btn btn-primary">
+    <i class="fas fa-plus"></i> Book New Ticket
+  </a>
+</div>
+
+<div class="card" style="padding:0;">
+  <div class="table-wrapper">
+    <table>
+      <thead><tr>
+        <th>Booking ID</th>
+        <th>Passenger</th>
+        <th>Passenger ID</th>
+        <th>Train</th>
+        <th>Journey Date</th>
+        <th>Route</th>
+        <th>Class</th>
+        <th>Seat</th>
+        <th>Fare</th>
+        <th>Payment</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr></thead>
+      <tbody>
+        {% for b in bookings %}
+        <tr>
+          <td>
+            <a href="{{ url_for('bookings.detail', booking_id=b.booking_id) }}"
+               class="mono" style="color:var(--gold);text-decoration:none;">
+              {{ b.booking_id }}
+            </a>
+          </td>
+          <td style="font-weight:600;">{{ b.passenger_name }}</td>
+          <td class="mono" style="color:var(--white-dim);">{{ b.passenger_id }}</td>
+          <td class="mono">{{ b.train_number_fk }}</td>
+          <td style="color:var(--white-dim);font-size:12px;">{{ b.journey_date.strftime('%d %b %Y') }}</td>
+          <td style="font-size:12px;color:var(--white-dim);">{{ b.source_station }} → {{ b.destination_station }}</td>
+          <td>{{ b.travel_class }}</td>
+          <td class="mono">{{ b.seat_berth_number or '—' }}</td>
+          <td style="color:var(--gold);font-weight:600;">₹{{ b.fare_amount }}</td>
+          <td style="font-size:12px;">{{ b.payment_method }}</td>
+          <td><span class="badge badge-{{ b.booking_status.lower() }}">{{ b.booking_status }}</span></td>
+          <td>
+            <div style="display:flex;gap:6px;">
+              <a href="{{ url_for('bookings.detail', booking_id=b.booking_id) }}"
+                 class="btn btn-secondary btn-sm btn-icon" title="View"><i class="fas fa-eye"></i></a>
+              {% if b.booking_status != 'Cancelled' %}
+              <a href="{{ url_for('bookings.upgrade', booking_id=b.booking_id) }}"
+                 class="btn btn-success btn-sm btn-icon" title="Upgrade"><i class="fas fa-arrow-up"></i></a>
+              <form method="POST" action="{{ url_for('bookings.cancel', booking_id=b.booking_id) }}"
+                    onsubmit="return confirm('Cancel ticket {{ b.booking_id }}?')">
+                <button type="submit" class="btn btn-danger btn-sm btn-icon" title="Cancel"><i class="fas fa-ban"></i></button>
+              </form>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="12">
+          <div class="empty-state">
+            <i class="fas fa-ticket"></i>
+            <p>No bookings found</p>
+            <a href="{{ url_for('bookings.book') }}" class="btn btn-primary">Book Your First Ticket</a>
+          </div>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

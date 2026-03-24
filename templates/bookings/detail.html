@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Ticket {{ booking.booking_id }}{% endblock %}
+{% block page_title %}Booking Detail{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Ticket <span>{{ booking.booking_id }}</span></h1>
+  <div style="display:flex;gap:10px;">
+    {% if booking.booking_status != 'Cancelled' %}
+    <a href="{{ url_for('bookings.upgrade', booking_id=booking.booking_id) }}" class="btn btn-success">
+      <i class="fas fa-arrow-up"></i> Upgrade
+    </a>
+    <form method="POST" action="{{ url_for('bookings.cancel', booking_id=booking.booking_id) }}"
+          onsubmit="return confirm('Cancel this ticket?')">
+      <button type="submit" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</button>
+    </form>
+    {% endif %}
+    <a href="{{ url_for('bookings.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+  </div>
+</div>
+
+<div class="ticket-card">
+  <!-- TICKET HEADER -->
+  <div class="ticket-header">
+    <div>
+      <h2><i class="fas fa-train"></i> RailConnect</h2>
+      <div style="font-size:13px;opacity:.8;margin-top:2px;">E-Ticket / Booking Confirmation</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;">{{ booking.booking_id }}</div>
+      <span class="badge badge-{{ booking.booking_status.lower() }}" style="font-size:12px;">
+        {{ booking.booking_status }}
+      </span>
+    </div>
+  </div>
+
+  <!-- TICKET BODY -->
+  <div class="ticket-body">
+    <!-- ROUTE -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-bottom:24px;">
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);">From</div>
+        <div style="font-size:22px;font-weight:700;color:var(--white);">{{ booking.source_station }}</div>
+      </div>
+      <div style="text-align:center;color:var(--red-bright);font-size:24px;">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);">To</div>
+        <div style="font-size:22px;font-weight:700;color:var(--white);">{{ booking.destination_station }}</div>
+      </div>
+    </div>
+
+    {% if train %}
+    <div style="background:var(--navy-3);border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;">
+      <div style="font-size:12px;color:var(--white-dim);">
+        <i class="fas fa-train" style="color:var(--red-bright);margin-right:6px;"></i>
+        <strong style="color:var(--white);">{{ train.train_name }}</strong>
+        <span class="mono" style="margin-left:8px;font-size:11px;">{{ train.train_number }}</span>
+      </div>
+      <div style="font-size:12px;color:var(--white-dim);">
+        <i class="fas fa-clock" style="color:var(--gold);margin-right:6px;"></i>
+        {{ train.departure_time }} → {{ train.arrival_time }}
+      </div>
+      <div style="font-size:12px;color:var(--white-dim);">
+        <i class="fas fa-location-dot" style="color:var(--red-bright);margin-right:6px;"></i>
+        Platform {{ train.platform_number }}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="ticket-divider"></div>
+
+    <!-- PASSENGER DETAILS -->
+    <div class="ticket-row">
+      <div class="ticket-field">
+        <label>Passenger Name</label>
+        <span>{{ booking.passenger_name }}</span>
+      </div>
+      <div class="ticket-field">
+        <label>Passenger ID</label>
+        <span class="mono" style="color:var(--gold);">{{ booking.passenger_id }}</span>
+      </div>
+      <div class="ticket-field">
+        <label>Journey Date</label>
+        <span>{{ booking.journey_date.strftime('%d %B %Y') }}</span>
+      </div>
+      <div class="ticket-field">
+        <label>Class</label>
+        <span>{{ booking.travel_class }}</span>
+      </div>
+      <div class="ticket-field">
+        <label>Seat / Berth</label>
+        <span class="mono">{{ booking.seat_berth_number or 'Waitlisted' }}</span>
+      </div>
+      <div class="ticket-field">
+        <label>Payment Method</label>
+        <span>{{ booking.payment_method }}</span>
+      </div>
+    </div>
+
+    <div class="ticket-divider"></div>
+
+    <!-- FARE -->
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:4px;">Booked On</div>
+        <div style="font-size:13px;color:var(--white-dim);">{{ booking.booking_date.strftime('%d %b %Y, %I:%M %p') }}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:4px;">Total Fare</div>
+        <div class="ticket-fare">₹{{ "{:,.2f}".format(booking.fare_amount) }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

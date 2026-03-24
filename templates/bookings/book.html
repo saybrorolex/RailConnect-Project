@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% block title %}Book Ticket{% endblock %}
+{% block page_title %}Book a Ticket{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Book <span>Ticket</span></h1>
+  <a href="{{ url_for('bookings.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;">
+
+  <!-- FORM -->
+  <div class="card">
+    <form method="POST" id="bookingForm">
+      <div class="form-grid">
+        <div class="form-group" style="grid-column:span 2;">
+          <label>Select Train</label>
+          <select name="train_number" id="trainSelect" required onchange="fetchTrainInfo()">
+            <option value="">— Choose a train —</option>
+            {% for t in trains %}
+            <option value="{{ t.train_number }}">
+              {{ t.train_number }} — {{ t.train_name }} ({{ t.source_station }} → {{ t.destination_station }})
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Travel Class</label>
+          <select name="travel_class" id="classSelect" required onchange="updateFare()">
+            <option value="">— Select class —</option>
+            <option value="General">General</option>
+            <option value="Sleeper">Sleeper</option>
+            <option value="AC 3-Tier">AC 3-Tier</option>
+            <option value="AC 2-Tier">AC 2-Tier</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Journey Date</label>
+          <input type="date" name="journey_date" required
+                 min="{{ now().strftime('%Y-%m-%d') if now else '' }}" />
+        </div>
+
+        <div class="form-group">
+          <label>Passenger Name</label>
+          <input type="text" name="passenger_name" value="{{ current_user.name }}" required/>
+        </div>
+
+        <div class="form-group">
+          <label>Payment Method</label>
+          <select name="payment_method" required>
+            <option value="">— Select method —</option>
+            <option value="UPI">UPI</option>
+            <option value="Net Banking">Net Banking</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+            <option value="Cash">Cash</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:12px;margin-top:24px;">
+        <button type="submit" class="btn btn-primary" style="flex:1;justify-content:center;">
+          <i class="fas fa-ticket"></i> Confirm Booking
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- LIVE TRAIN INFO CARD -->
+  <div id="trainInfoCard" style="display:none;">
+    <div class="card" style="border-color:var(--red);box-shadow:0 0 20px var(--red-glow);">
+      <div class="card-title"><i class="fas fa-train"></i> Train Info</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Train</div>
+          <div style="font-weight:600;" id="infoName">—</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Departs</div>
+            <div class="mono" style="color:var(--gold);" id="infoDep">—</div>
+          </div>
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Arrives</div>
+            <div class="mono" style="color:var(--gold);" id="infoArr">—</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Distance</div>
+            <div id="infoDist">—</div>
+          </div>
+          <div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:3px;">Seats Left</div>
+            <div id="infoSeats" style="font-weight:700;">—</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--navy-4);padding-top:14px;text-align:center;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--white-dim);margin-bottom:6px;">Estimated Fare</div>
+          <div id="fareDisplay" style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);line-height:1;">
+            ₹—
+          </div>
+          <div id="fareNote" style="font-size:11px;color:var(--white-dim);margin-top:4px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentTrain = null;
+
+async function fetchTrainInfo() {
+  const trainNo = document.getElementById('trainSelect').value;
+  const card = document.getElementById('trainInfoCard');
+  if (!trainNo) { card.style.display = 'none'; return; }
+
+  try {
+    const res = await fetch(`/trains/api/${trainNo}`);
+    currentTrain = await res.json();
+
+    document.getElementById('infoName').textContent = currentTrain.train_name;
+    document.getElementById('infoDep').textContent  = currentTrain.departure_time;
+    document.getElementById('infoArr').textContent  = currentTrain.arrival_time;
+    document.getElementById('infoDist').textContent = currentTrain.distance_km + ' km';
+
+    const seats = currentTrain.available_seats;
+    const seatsEl = document.getElementById('infoSeats');
+    seatsEl.textContent = seats;
+    seatsEl.style.color = seats > 50 ? 'var(--green)' : seats > 0 ? 'var(--amber)' : 'var(--red-bright)';
+
+    card.style.display = 'block';
+    updateFare();
+  } catch(e) {
+    card.style.display = 'none';
+  }
+}
+
+async function updateFare() {
+  if (!currentTrain) return;
+  const cls = document.getElementById('classSelect').value;
+  if (!cls) { document.getElementById('fareDisplay').textContent = '₹—'; return; }
+
+  try {
+    const res = await fetch(`/bookings/api/fare?class=${encodeURIComponent(cls)}&train=${currentTrain.train_number}`);
+    const data = await res.json();
+    document.getElementById('fareDisplay').textContent = '₹' + data.fare.toLocaleString('en-IN');
+    document.getElementById('fareNote').textContent = `${cls} · ${currentTrain.train_type} · ${currentTrain.distance_km} km`;
+  } catch(e) {}
+}
+
+// Set min journey date to today
+document.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.querySelector('input[name="journey_date"]');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    dateInput.value = today;
+  }
+});
+</script>
+{% endblock %}

@@ -5,11 +5,8 @@ class Config:
 
     DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
-    # Render provides postgres:// — fix prefix and driver for psycopg v3
     if DATABASE_URL.startswith('postgres://'):
-        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql+psycopg://', 1)
-    elif DATABASE_URL.startswith('postgresql://'):
-        DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+psycopg://', 1)
+        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
 
     SQLALCHEMY_DATABASE_URI = DATABASE_URL or 'sqlite:///railconnect.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False

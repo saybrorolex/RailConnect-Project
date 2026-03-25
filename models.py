@@ -6,9 +6,6 @@ import random, string
 from datetime import datetime
 
 
-# ─────────────────────────────────────────────
-# USER MODEL (Admin & Passenger login)
-# ─────────────────────────────────────────────
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
@@ -16,11 +13,10 @@ class User(UserMixin, db.Model):
     name          = db.Column(db.String(100), nullable=False)
     email         = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
-    role          = db.Column(db.Enum('admin', 'passenger'), default='passenger', nullable=False)
-    passenger_id  = db.Column(db.String(20), unique=True, nullable=True)  # e.g. P12345
+    role          = db.Column(db.String(20), default='passenger', nullable=False)
+    passenger_id  = db.Column(db.String(20), unique=True, nullable=True)
     created_at    = db.Column(db.DateTime, default=datetime.utcnow)
 
-    # Relationship to bookings
     bookings = db.relationship('Booking', foreign_keys='Booking.passenger_id_fk',
                                backref='user', lazy=True)
 
@@ -31,7 +27,6 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def generate_passenger_id(self):
-        """Generate a unique passenger ID like P12345"""
         while True:
             pid = 'P' + ''.join(random.choices(string.digits, k=5))
             if not User.query.filter_by(passenger_id=pid).first():
@@ -47,24 +42,21 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# ─────────────────────────────────────────────
-# TRAIN MODEL
-# ─────────────────────────────────────────────
 class Train(db.Model):
     __tablename__ = 'trains'
 
-    id                   = db.Column(db.Integer, primary_key=True)
-    state_ut             = db.Column(db.String(100), nullable=False)
-    train_number         = db.Column(db.Integer, unique=True, nullable=False)
-    train_name           = db.Column(db.String(150), nullable=False)
-    route                = db.Column(db.String(200), nullable=False)
-    departure_time       = db.Column(db.String(10), nullable=False)   # stored as "HH:MM"
-    arrival_time         = db.Column(db.String(10), nullable=False)
-    train_type           = db.Column(db.Enum('Passenger','Mail','Express','Superfast','Rajdhani','Shatabdi'), nullable=False)
-    status               = db.Column(db.Enum('Active','Delayed','Cancelled'), default='Active')
-    capacity             = db.Column(db.Integer, nullable=False)
-    platform_number      = db.Column(db.Integer, nullable=False)
-    distance_km          = db.Column(db.Float, nullable=False)
+    id              = db.Column(db.Integer, primary_key=True)
+    state_ut        = db.Column(db.String(100), nullable=False)
+    train_number    = db.Column(db.Integer, unique=True, nullable=False)
+    train_name      = db.Column(db.String(150), nullable=False)
+    route           = db.Column(db.String(200), nullable=False)
+    departure_time  = db.Column(db.String(10), nullable=False)
+    arrival_time    = db.Column(db.String(10), nullable=False)
+    train_type      = db.Column(db.String(20), nullable=False)
+    status          = db.Column(db.String(20), default='Active')
+    capacity        = db.Column(db.Integer, nullable=False)
+    platform_number = db.Column(db.Integer, nullable=False)
+    distance_km     = db.Column(db.Float, nullable=False)
 
     bookings = db.relationship('Booking', backref='train', lazy=True)
 
@@ -93,27 +85,24 @@ class Train(db.Model):
         return f'<Train {self.train_number} - {self.train_name}>'
 
 
-# ─────────────────────────────────────────────
-# BOOKING / PASSENGER MODEL
-# ─────────────────────────────────────────────
 class Booking(db.Model):
     __tablename__ = 'bookings'
 
-    id                 = db.Column(db.Integer, primary_key=True)
-    booking_id         = db.Column(db.String(10), unique=True, nullable=False)   # e.g. B45164
-    passenger_id       = db.Column(db.String(10), nullable=False)                # e.g. P16182
-    passenger_id_fk    = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-    train_number_fk    = db.Column(db.Integer, db.ForeignKey('trains.train_number'), nullable=False)
-    journey_date       = db.Column(db.Date, nullable=False)
-    source_station     = db.Column(db.String(100), nullable=False)
-    destination_station= db.Column(db.String(100), nullable=False)
-    travel_class       = db.Column(db.Enum('Sleeper','General','AC 2-Tier','AC 3-Tier'), nullable=False)
-    seat_berth_number  = db.Column(db.Integer, nullable=True)
-    fare_amount        = db.Column(db.Float, nullable=False)
-    booking_status     = db.Column(db.Enum('Confirmed','Waitlisted','Cancelled'), default='Confirmed')
-    booking_date       = db.Column(db.DateTime, default=datetime.utcnow)
-    payment_method     = db.Column(db.Enum('UPI','Net Banking','Cash','Credit Card','Debit Card'), nullable=False)
-    passenger_name     = db.Column(db.String(100), nullable=False)
+    id                  = db.Column(db.Integer, primary_key=True)
+    booking_id          = db.Column(db.String(10), unique=True, nullable=False)
+    passenger_id        = db.Column(db.String(10), nullable=False)
+    passenger_id_fk     = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    train_number_fk     = db.Column(db.Integer, db.ForeignKey('trains.train_number'), nullable=False)
+    journey_date        = db.Column(db.Date, nullable=False)
+    source_station      = db.Column(db.String(100), nullable=False)
+    destination_station = db.Column(db.String(100), nullable=False)
+    travel_class        = db.Column(db.String(20), nullable=False)
+    seat_berth_number   = db.Column(db.Integer, nullable=True)
+    fare_amount         = db.Column(db.Float, nullable=False)
+    booking_status      = db.Column(db.String(20), default='Confirmed')
+    booking_date        = db.Column(db.DateTime, default=datetime.utcnow)
+    payment_method      = db.Column(db.String(30), nullable=False)
+    passenger_name      = db.Column(db.String(100), nullable=False)
 
     def generate_booking_id(self):
         while True:
@@ -123,7 +112,6 @@ class Booking(db.Model):
                 break
 
     def assign_seat(self):
-        """Auto-assign next available seat number"""
         existing = Booking.query.filter_by(
             train_number_fk=self.train_number_fk,
             booking_status='Confirmed'

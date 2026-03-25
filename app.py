@@ -8,6 +8,7 @@ from routes.bookings import bookings_bp
 from routes.analytics import analytics_bp
 from routes.search import search_bp
 from routes.fare import fare_bp
+from routes.migrate import migrate_bp
 from models import User
 
 def create_app():
@@ -27,10 +28,10 @@ def create_app():
     app.register_blueprint(analytics_bp)
     app.register_blueprint(search_bp)
     app.register_blueprint(fare_bp)
+    app.register_blueprint(migrate_bp)
 
     with app.app_context():
         db.create_all()
-        # Create default admin if not exists
         if not User.query.filter_by(email='admin@railconnect.com').first():
             admin = User(name='Admin', email='admin@railconnect.com', role='admin')
             admin.set_password('admin123')

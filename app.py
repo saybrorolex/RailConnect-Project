@@ -8,6 +8,7 @@ from routes.bookings import bookings_bp
 from routes.analytics import analytics_bp
 from routes.search import search_bp
 from routes.fare import fare_bp
+from models import User
 
 def create_app():
     app = Flask(__name__)
@@ -27,12 +28,18 @@ def create_app():
     app.register_blueprint(search_bp)
     app.register_blueprint(fare_bp)
 
+    with app.app_context():
+        db.create_all()
+        # Create default admin if not exists
+        if not User.query.filter_by(email='admin@railconnect.com').first():
+            admin = User(name='Admin', email='admin@railconnect.com', role='admin')
+            admin.set_password('admin123')
+            db.session.add(admin)
+            db.session.commit()
+
     return app
 
-# Expose app at module level for Gunicorn: gunicorn "app:app"
 app = create_app()
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=False)

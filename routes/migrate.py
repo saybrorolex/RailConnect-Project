@@ -7,7 +7,7 @@ from models import Train, Booking
 migrate_bp = Blueprint('migrate', __name__, url_prefix='/migrate')
 
 # Simple secret key to prevent anyone else from triggering this
-MIGRATE_SECRET = os.environ.get('MIGRATE_SECRET', '')
+MIGRATE_SECRET = os.environ.get('MIGRATE_SECRET', 'mysecret123')
 
 
 @migrate_bp.route('/<secret>')

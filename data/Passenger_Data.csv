@@ -1,0 +1,151 @@
+Booking ID,Passenger ID,Train Number,Journey Date,Source Station,Destination Station,Class,Seat/Berth Number,Fare Amount,Booking Status,Booking Date,Payment Method,Passenger Name
+B45164,P16182,12165,12/21/2024,Ambala,Mumbai,AC 3-Tier,57,3108,Waitlisted,6/30/2024,UPI,Shivani Thakur
+B66515,P45833,15655,12/3/2024,Agartala,Dimapur,Sleeper,84,385,Cancelled,4/7/2024,Net Banking,Sachi Dhawan
+B44293,P67547,15013,12/14/2024,New Delhi,Nainital,Sleeper,118,330,Cancelled,9/21/2024,Cash,Oliver Sidhu
+B32821,P65807,15655,11/25/2024,Agartala,Dimapur,AC 2-Tier,86,1155,Waitlisted,3/28/2024,Cash,Kiaan Kalita
+B59083,P91792,52459,11/26/2024,Kalka,Shimla,Sleeper,127,96,Waitlisted,9/19/2024,Cash,Lopa Thakur
+B35400,P95256,15655,12/11/2024,Agartala,Dimapur,AC 3-Tier,147,770,Cancelled,1/23/2024,Cash,Om Wagle
+B14771,P46331,13307,11/30/2024,Ranchi,Howrah,General,40,382.8,Cancelled,8/7/2024,UPI,Amara Sidhu
+B41513,P25938,55602,11/26/2024,Aizawl,Guwahati,Sleeper,13,495,Waitlisted,4/18/2024,Debit Card,Balendra Rau
+B88759,P41760,15959,11/24/2024,Guwahati,Dibrugarh,Sleeper,19,495,Waitlisted,6/26/2024,Credit Card,Om Agarwal
+B44139,P08499,55602,12/13/2024,Aizawl,Guwahati,AC 3-Tier,184,990,Cancelled,9/30/2024,Cash,Chandresh Dugal
+B76755,P31745,18477,11/27/2024,Puri,Haridwar,General,99,1408,Cancelled,4/19/2024,Debit Card,Gauri Som
+B29158,P95534,12907,12/11/2024,Gandhinagar,Mumbai,AC 3-Tier,34,1260,Waitlisted,4/5/2024,Cash,Xiti Trivedi
+B09677,P09401,12301,11/27/2024,New Delhi,Lucknow,AC 3-Tier,145,1430,Confirmed,11/9/2024,Net Banking,Darika Bedi
+B29719,P91670,15655,12/5/2024,Agartala,Dimapur,AC 3-Tier,121,770,Cancelled,2/9/2024,Debit Card,Isaiah Khurana
+B88298,P04397,15952,11/28/2024,Guwahati,Shillong,Sleeper,108,105,Waitlisted,6/27/2024,Credit Card,Garima Oak
+B15999,P56327,12703,12/21/2024,Hyderabad,Mumbai,Sleeper,104,770,Cancelled,3/6/2024,Net Banking,Dev Chandra
+B69866,P33769,12309,12/6/2024,New Delhi,Patna,AC 2-Tier,149,4680,Cancelled,3/8/2024,Cash,Rachit Radhakrishnan
+B09892,P84809,15603,12/21/2024,Naharlagun,Guwahati,Sleeper,111,561,Confirmed,6/2/2024,Credit Card,Anirudh Roy
+B42256,P83901,15603,12/9/2024,Naharlagun,Guwahati,Sleeper,106,561,Cancelled,7/2/2024,Net Banking,Ekiya Om
+B03242,P02475,11007,12/13/2024,Mumbai,Pune,Sleeper,29,209,Cancelled,10/25/2024,Cash,Fiyaz Dash
+B81345,P06650,12015,11/30/2024,New Delhi,Ajmer,AC 2-Tier,48,1215,Waitlisted,10/3/2024,Credit Card,Henry Karpe
+B06994,P99117,12309,12/13/2024,New Delhi,Patna,General,2,1248,Cancelled,2/6/2024,UPI,Priya Goyal
+B76709,P24280,52459,12/15/2024,Kalka,Shimla,Sleeper,23,96,Cancelled,7/8/2024,Cash,Devika Sankar
+B73753,P61027,12015,12/13/2024,New Delhi,Ajmer,Sleeper,125,405,Waitlisted,9/4/2024,UPI,Max Batra
+B61696,P93089,12313,12/2/2024,New Delhi,Howrah,General,82,1768,Cancelled,11/13/2024,UPI,Anusha Samra
+B86392,P00347,15655,12/15/2024,Agartala,Dimapur,AC 2-Tier,188,1155,Cancelled,8/11/2024,Debit Card,Qabil Saha
+B96296,P11133,15601,11/30/2024,Imphal,Silchar,AC 3-Tier,3,819,Cancelled,5/30/2024,Credit Card,Arya Chahal
+B22822,P26610,12007,12/15/2024,Mysuru,Bangalore,General,151,162,Confirmed,11/11/2024,Credit Card,Ucchal Pandya
+B20798,P31024,12053,12/2/2024,Chandigarh,Kolkata,AC 3-Tier,91,3630,Cancelled,7/1/2024,Net Banking,Isaiah Modi
+B01088,P39953,15013,12/11/2024,New Delhi,Nainital,General,61,264,Cancelled,7/5/2024,UPI,Vanya Varkey
+B34367,P81164,15601,12/20/2024,Imphal,Silchar,General,97,327.6,Confirmed,8/17/2024,Cash,Vyanjana Tandon
+B06664,P10288,12187,12/11/2024,Bhopal,New Delhi,General,84,756,Confirmed,5/26/2024,Credit Card,Aditya Aggarwal
+B10914,P78715,12203,12/19/2024,New Delhi,Trivandrum,AC 3-Tier,23,7410,Waitlisted,7/8/2024,Net Banking,Umang Dara
+B43009,P06539,12809,12/10/2024,Raipur,Lokmanya Tilak (Mumbai),AC 3-Tier,192,3024,Confirmed,4/30/2024,Credit Card,Panini Golla
+B08605,P11516,19005,12/15/2024,Mumbai,Diu,AC 2-Tier,109,1584,Confirmed,7/19/2024,Net Banking,Yoshita Randhawa
+B08953,P77628,12907,12/18/2024,Gandhinagar,Mumbai,AC 3-Tier,167,1260,Cancelled,8/9/2024,UPI,Arya Sahni
+B17206,P00642,15647,11/23/2024,Dimapur,Kolkata,Sleeper,142,880,Cancelled,10/17/2024,UPI,Vasatika Jain
+B91885,P20887,19005,12/18/2024,Mumbai,Diu,Sleeper,156,528,Cancelled,6/25/2024,Cash,Gayathri Kade
+B73676,P80015,13307,12/20/2024,Ranchi,Howrah,AC 3-Tier,98,957,Cancelled,1/14/2024,Net Banking,Laban Oza
+B53416,P84295,12001,11/26/2024,New Delhi,Amritsar,AC 3-Tier,94,1215,Cancelled,6/16/2024,Debit Card,Dalbir Rama
+B57802,P95017,12165,11/24/2024,Ambala,Mumbai,AC 3-Tier,7,3108,Cancelled,6/29/2024,Net Banking,Azad Nazareth
+B08945,P84654,12703,12/10/2024,Hyderabad,Mumbai,Sleeper,35,770,Confirmed,8/13/2024,UPI,Irya Bedi
+B02016,P82329,11021,12/11/2024,Surat,Dadar,Sleeper,184,220,Confirmed,6/26/2024,Debit Card,Kritika Thakkar
+B59729,P24420,12001,12/21/2024,New Delhi,Amritsar,General,163,486,Cancelled,8/27/2024,Net Banking,Lopa Morar
+B38862,P32123,12007,12/12/2024,Mysuru,Bangalore,AC 3-Tier,13,405,Waitlisted,10/28/2024,Net Banking,Tanveer Tripathi
+B48331,P37449,15952,12/13/2024,Guwahati,Shillong,Sleeper,2,105,Confirmed,1/19/2024,Net Banking,Omkaar Karan
+B71335,P35511,12703,11/29/2024,Hyderabad,Mumbai,Sleeper,176,770,Waitlisted,6/11/2024,Debit Card,Yatin Sachdev
+B75400,P69354,52459,12/4/2024,Kalka,Shimla,Sleeper,155,96,Cancelled,3/30/2024,Net Banking,Aashi Bhardwaj
+B14398,P01601,15647,12/22/2024,Dimapur,Kolkata,General,18,704,Waitlisted,3/12/2024,Credit Card,Laksh Sur
+B30966,P36236,11007,12/8/2024,Mumbai,Pune,Sleeper,133,209,Cancelled,10/26/2024,UPI,Darika Varghese
+B05953,P00284,12001,11/26/2024,New Delhi,Amritsar,AC 3-Tier,17,1215,Waitlisted,4/9/2024,Debit Card,Charita Behl
+B21723,P94277,12165,12/4/2024,Ambala,Mumbai,AC 2-Tier,174,4662,Confirmed,1/6/2024,UPI,Vansha Mukhopadhyay
+B01804,P35137,12165,12/18/2024,Ambala,Mumbai,Sleeper,120,1554,Cancelled,1/15/2024,UPI,Chaitaly Lall
+B25803,P65820,12703,12/2/2024,Hyderabad,Mumbai,AC 2-Tier,147,2310,Cancelled,2/5/2024,Net Banking,Jairaj Dhillon
+B81090,P18048,12165,11/29/2024,Ambala,Mumbai,General,107,1243.2,Confirmed,1/5/2024,UPI,Nachiket Kala
+B79599,P85806,12015,12/6/2024,New Delhi,Ajmer,Sleeper,187,405,Cancelled,7/1/2024,Credit Card,Rachana Kadakia
+B56501,P14382,12165,12/10/2024,Ambala,Mumbai,AC 2-Tier,98,4662,Waitlisted,1/7/2024,Debit Card,Frederick Keer
+B20517,P67915,15655,11/26/2024,Agartala,Dimapur,AC 3-Tier,91,770,Cancelled,3/23/2024,UPI,Indrajit Sama
+B97974,P90263,12703,12/7/2024,Hyderabad,Mumbai,AC 2-Tier,15,2310,Waitlisted,11/11/2024,Net Banking,Zarna Uppal
+B97974,P63279,12203,12/22/2024,New Delhi,Trivandrum,AC 2-Tier,38,11115,Cancelled,1/29/2024,Debit Card,Raksha Prabhakar
+B49398,P62423,12165,12/10/2024,Ambala,Mumbai,Sleeper,131,1554,Cancelled,4/15/2024,Debit Card,Avni Agarwal
+B25177,P40139,15013,12/6/2024,New Delhi,Nainital,AC 2-Tier,114,990,Confirmed,6/12/2024,Net Banking,Raghav Ganesan
+B73119,P05622,12801,12/15/2024,Visakhapatnam,Howrah,Sleeper,155,1074,Confirmed,7/14/2024,Debit Card,Hemal Dayal
+B51029,P59831,52459,12/4/2024,Kalka,Shimla,AC 3-Tier,162,192,Cancelled,3/4/2024,Cash,Dalaja Bedi
+B51473,P19746,12703,11/24/2024,Hyderabad,Mumbai,AC 2-Tier,80,2310,Confirmed,8/3/2024,UPI,Yoshita Venkataraman
+B69478,P94075,12907,12/8/2024,Gandhinagar,Mumbai,AC 3-Tier,47,1260,Cancelled,5/8/2024,Credit Card,Rachita Baral
+B50509,P95102,15655,12/13/2024,Agartala,Dimapur,AC 3-Tier,97,770,Waitlisted,7/24/2024,UPI,Aadi Char
+B01684,P70784,15013,12/9/2024,New Delhi,Nainital,AC 3-Tier,55,660,Cancelled,11/14/2024,Cash,Reva Kalla
+B17843,P49745,12187,12/9/2024,Bhopal,New Delhi,General,130,756,Cancelled,3/5/2024,Debit Card,Ekiya Rajan
+B09277,P65250,12053,11/28/2024,Chandigarh,Kolkata,AC 2-Tier,159,5445,Waitlisted,5/11/2024,Net Banking,Brijesh Jaggi
+B58406,P10023,12801,12/2/2024,Visakhapatnam,Howrah,General,102,859.2,Waitlisted,7/19/2024,Credit Card,Banjeet Murthy
+B93553,P24469,15959,12/6/2024,Guwahati,Dibrugarh,Sleeper,147,495,Confirmed,5/13/2024,Debit Card,Nimrat Rege
+B73756,P21187,12165,12/8/2024,Ambala,Mumbai,AC 3-Tier,96,3108,Waitlisted,3/28/2024,Debit Card,Pallavi Ram
+B77869,P26367,12203,11/30/2024,New Delhi,Trivandrum,Sleeper,89,3705,Confirmed,7/12/2024,Net Banking,Ikbal Lal
+B38847,P57684,15013,12/21/2024,New Delhi,Nainital,AC 2-Tier,40,990,Waitlisted,9/25/2024,Cash,Libni Vohra
+B37414,P76939,12907,12/3/2024,Gandhinagar,Mumbai,Sleeper,141,630,Waitlisted,8/10/2024,UPI,Jack Patla
+B58079,P14416,12165,12/6/2024,Ambala,Mumbai,Sleeper,106,1554,Waitlisted,9/7/2024,Credit Card,Ekaja Prasad
+B67235,P17819,15013,12/17/2024,New Delhi,Nainital,AC 3-Tier,37,660,Cancelled,5/11/2024,UPI,Udyati Pandya
+B38360,P34764,12203,12/16/2024,New Delhi,Trivandrum,Sleeper,190,3705,Cancelled,10/18/2024,Net Banking,Orinder Patil
+B80138,P92787,19005,11/25/2024,Mumbai,Diu,AC 2-Tier,130,1584,Confirmed,10/7/2024,Cash,Chaitanya Samra
+B91844,P99127,12809,12/9/2024,Raipur,Lokmanya Tilak (Mumbai),General,44,1209.6,Confirmed,6/20/2024,Credit Card,Lajita Morar
+B27642,P18554,12809,12/13/2024,Raipur,Lokmanya Tilak (Mumbai),AC 2-Tier,83,4536,Cancelled,5/8/2024,Debit Card,Qabil Arya
+B56276,P59318,15655,12/8/2024,Agartala,Dimapur,AC 2-Tier,103,1155,Waitlisted,8/19/2024,Net Banking,Ubika Sur
+B84265,P72022,15603,12/10/2024,Naharlagun,Guwahati,AC 3-Tier,23,1122,Waitlisted,5/4/2024,Net Banking,Isaac Johal
+B77186,P80608,12313,12/5/2024,New Delhi,Howrah,AC 2-Tier,80,6630,Cancelled,8/6/2024,Cash,Charvi Shan
+B49996,P21855,12809,12/3/2024,Raipur,Lokmanya Tilak (Mumbai),General,112,1209.6,Waitlisted,1/31/2024,UPI,Ganga Loyal
+B09098,P42894,15013,12/14/2024,New Delhi,Nainital,AC 3-Tier,104,660,Cancelled,2/11/2024,Debit Card,Niharika Chaudhuri
+B30205,P94531,15647,11/28/2024,Dimapur,Kolkata,Sleeper,41,880,Confirmed,9/10/2024,Net Banking,Sneha Bobal
+B16818,P87933,12907,12/3/2024,Gandhinagar,Mumbai,Sleeper,118,630,Cancelled,7/25/2024,Credit Card,Alexander Raja
+B12315,P36417,15013,11/24/2024,New Delhi,Nainital,AC 3-Tier,57,660,Confirmed,11/18/2024,Debit Card,Alexander Khatri
+B24723,P13460,18477,11/27/2024,Puri,Haridwar,AC 3-Tier,191,3520,Cancelled,7/26/2024,Credit Card,Qushi Shukla
+B97076,P27960,15603,12/13/2024,Naharlagun,Guwahati,AC 3-Tier,136,1122,Waitlisted,10/16/2024,Cash,Sara Saini
+B50169,P78923,15655,12/12/2024,Agartala,Dimapur,General,188,308,Cancelled,8/23/2024,Cash,Garima Master
+B93045,P77838,13307,11/28/2024,Ranchi,Howrah,AC 3-Tier,34,957,Cancelled,8/28/2024,Cash,Udarsh Choudhary
+B24722,P25738,12907,12/4/2024,Gandhinagar,Mumbai,General,117,504,Cancelled,8/30/2024,Cash,Lipika Sani
+B17016,P67486,11007,12/20/2024,Mumbai,Pune,Sleeper,176,209,Confirmed,1/19/2024,Net Banking,Unnati Devan
+B47291,P73388,15601,12/12/2024,Imphal,Silchar,Sleeper,148,409.5,Confirmed,6/3/2024,Net Banking,Nikita Das
+B69472,P93686,15013,12/22/2024,New Delhi,Nainital,Sleeper,48,330,Waitlisted,9/14/2024,Debit Card,Ekani Brahmbhatt
+B01707,P92274,12015,12/3/2024,New Delhi,Ajmer,Sleeper,17,405,Cancelled,3/23/2024,Debit Card,Faraj Narain
+B05665,P96262,15013,11/25/2024,New Delhi,Nainital,AC 3-Tier,90,660,Cancelled,9/7/2024,Cash,Tanmayi Maharaj
+B05718,P94798,18477,12/9/2024,Puri,Haridwar,AC 2-Tier,121,5280,Waitlisted,8/5/2024,Debit Card,Anirudh Desai
+B42618,P86248,15601,11/28/2024,Imphal,Silchar,AC 3-Tier,186,819,Waitlisted,8/29/2024,Debit Card,Xalak Zacharia
+B05499,P61195,12053,12/20/2024,Chandigarh,Kolkata,Sleeper,196,1815,Cancelled,6/22/2024,Credit Card,Onkar Ramesh
+B13799,P98591,15952,12/19/2024,Guwahati,Shillong,AC 3-Tier,119,210,Waitlisted,6/22/2024,Debit Card,Wahab Comar
+B41332,P54360,10107,12/8/2024,Madgaon,Mumbai,Sleeper,179,841.5,Cancelled,9/25/2024,Cash,Unnati Solanki
+B83210,P19908,12703,11/28/2024,Hyderabad,Mumbai,AC 3-Tier,140,1540,Waitlisted,3/29/2024,Debit Card,Michael Pradhan
+B08892,P17961,12809,12/18/2024,Raipur,Lokmanya Tilak (Mumbai),General,169,1209.6,Waitlisted,2/24/2024,Credit Card,Advika Natarajan
+B81682,P10172,19005,12/20/2024,Mumbai,Diu,AC 3-Tier,118,1056,Confirmed,1/30/2024,UPI,Gagan Shroff
+B96386,P37160,15013,12/15/2024,New Delhi,Nainital,Sleeper,200,330,Confirmed,8/22/2024,Debit Card,Meera Sandhu
+B40335,P20751,18477,12/13/2024,Puri,Haridwar,AC 2-Tier,172,5280,Waitlisted,10/3/2024,Credit Card,Gabriel Bail
+B63016,P19744,55602,11/23/2024,Aizawl,Guwahati,Sleeper,118,495,Waitlisted,1/24/2024,Cash,Owen Kant
+B12575,P55645,13307,11/28/2024,Ranchi,Howrah,AC 2-Tier,42,1435.5,Waitlisted,11/19/2024,Debit Card,Tanvi Sinha
+B96867,P94196,12165,11/26/2024,Ambala,Mumbai,AC 2-Tier,86,4662,Waitlisted,6/18/2024,Cash,Vritti Bail
+B39704,P37130,11021,12/10/2024,Surat,Dadar,General,122,176,Waitlisted,2/22/2024,Debit Card,Bina Tank
+B56471,P64405,12301,12/19/2024,New Delhi,Lucknow,AC 3-Tier,117,1430,Confirmed,1/16/2024,Debit Card,Champak Prakash
+B73193,P99103,12809,11/23/2024,Raipur,Lokmanya Tilak (Mumbai),Sleeper,33,1512,Confirmed,3/28/2024,Cash,Jeevika Mall
+B92206,P88458,12601,12/1/2024,Chennai,Mumbai,AC 2-Tier,83,4095,Confirmed,4/23/2024,Cash,Gaurav Ramakrishnan
+B09707,P85174,15601,12/15/2024,Imphal,Silchar,AC 3-Tier,32,819,Cancelled,4/20/2024,Net Banking,Yauvani Upadhyay
+B25174,P53117,12001,12/3/2024,New Delhi,Amritsar,AC 3-Tier,2,1215,Confirmed,3/23/2024,Cash,Dominic Toor
+B79868,P12361,15603,12/15/2024,Naharlagun,Guwahati,General,75,448.8,Confirmed,2/2/2024,Cash,Lohit Tiwari
+B01327,P02280,12907,12/5/2024,Gandhinagar,Mumbai,General,82,504,Cancelled,5/14/2024,Net Banking,Tara Deshpande
+B87104,P70374,12313,12/11/2024,New Delhi,Howrah,General,157,1768,Waitlisted,7/20/2024,Cash,Jagdish Bali
+B28468,P86471,55602,12/9/2024,Aizawl,Guwahati,General,196,396,Waitlisted,1/23/2024,Cash,Nidra Chakrabarti
+B92609,P00882,55602,11/26/2024,Aizawl,Guwahati,Sleeper,152,495,Confirmed,9/7/2024,Debit Card,Wishi Batra
+B26737,P40823,15655,11/29/2024,Agartala,Dimapur,Sleeper,32,385,Waitlisted,1/12/2024,Net Banking,Damini Bhat
+B25651,P28398,15647,12/8/2024,Dimapur,Kolkata,AC 2-Tier,184,2640,Cancelled,9/22/2024,Debit Card,Amruta Ramakrishnan
+B04092,P34398,12015,11/30/2024,New Delhi,Ajmer,AC 3-Tier,70,810,Waitlisted,5/18/2024,UPI,Waida Setty
+B24136,P75261,12907,12/16/2024,Gandhinagar,Mumbai,AC 3-Tier,148,1260,Cancelled,1/2/2024,UPI,Aashi Chaudhuri
+B87166,P48124,52459,12/9/2024,Kalka,Shimla,General,186,76.8,Confirmed,1/4/2024,UPI,Utkarsh Pant
+B48633,P65615,12907,12/7/2024,Gandhinagar,Mumbai,Sleeper,184,630,Confirmed,7/29/2024,UPI,Parth Parmer
+B72694,P82518,12015,12/4/2024,New Delhi,Ajmer,Sleeper,50,405,Waitlisted,6/10/2024,Cash,Tarak Yadav
+B28650,P81519,15655,11/27/2024,Agartala,Dimapur,AC 2-Tier,56,1155,Cancelled,10/15/2024,Debit Card,Hitesh Walia
+B92683,P72740,15013,11/28/2024,New Delhi,Nainital,General,177,264,Waitlisted,11/16/2024,Credit Card,Omaja Narula
+B27739,P04629,11007,11/28/2024,Mumbai,Pune,General,12,167.2,Confirmed,2/27/2024,Credit Card,Warjas Pai
+B74649,P00352,52459,12/18/2024,Kalka,Shimla,Sleeper,138,96,Confirmed,7/13/2024,Debit Card,Siddharth Cheema
+B73467,P92027,12313,12/14/2024,New Delhi,Howrah,AC 2-Tier,34,6630,Cancelled,4/24/2024,Credit Card,Aradhana Walla
+B62955,P99965,19005,12/9/2024,Mumbai,Diu,AC 3-Tier,137,1056,Confirmed,7/4/2024,Cash,Netra Lad
+B49443,P73243,13307,11/27/2024,Ranchi,Howrah,Sleeper,129,478.5,Cancelled,7/2/2024,UPI,Neha Barman
+B20852,P74345,52459,11/26/2024,Kalka,Shimla,AC 2-Tier,171,288,Waitlisted,1/8/2024,Credit Card,Chanakya Dubey
+B35110,P19965,12187,12/20/2024,Bhopal,New Delhi,Sleeper,195,945,Cancelled,8/13/2024,Cash,Janya Garde
+B75971,P34455,15647,11/23/2024,Dimapur,Kolkata,Sleeper,49,880,Waitlisted,9/1/2024,Credit Card,Dalbir Rajagopalan
+B60336,P40093,12601,12/16/2024,Chennai,Mumbai,Sleeper,139,1365,Confirmed,6/5/2024,Credit Card,Harish Lanka
+B32410,P16739,15959,12/1/2024,Guwahati,Dibrugarh,General,119,396,Waitlisted,11/4/2024,Net Banking,Chaitanya Goyal
+B50401,P94106,15601,12/18/2024,Imphal,Silchar,AC 2-Tier,27,1228.5,Confirmed,9/14/2024,Debit Card,Watika Sharma
+B19444,P94422,12313,11/28/2024,New Delhi,Howrah,General,158,1768,Confirmed,10/10/2024,Debit Card,Kiaan Nigam
+B50727,P91203,11021,12/7/2024,Surat,Dadar,AC 2-Tier,92,660,Confirmed,5/5/2024,UPI,Janaki Kalita
+B25811,P91772,12187,12/14/2024,Bhopal,New Delhi,Sleeper,34,945,Cancelled,2/4/2024,Cash,Pavani Thaker
+B46042,P31335,12203,11/28/2024,New Delhi,Trivandrum,General,185,2964,Waitlisted,5/31/2024,Cash,Vedant Sarraf
+B75636,P54603,12309,12/10/2024,New Delhi,Patna,Sleeper,177,1560,Waitlisted,2/17/2024,Cash,Prisha Sahni
+B58230,P22661,52459,12/4/2024,Kalka,Shimla,General,91,76.8,Waitlisted,3/14/2024,UPI,Teerth Shan
